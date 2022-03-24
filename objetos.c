@@ -4,8 +4,8 @@
 #include "enemigo.h"
 
 ////////////////////////////////////////////////////////////
-//Añadir la función para crear un objeto de un tipo dado. Inicializa sus valores "tipo",
-//"sprite" y "posición" dependiendo del tipo indicado. La posición por defecto es "X=0" "Y=0"
+// Aniadir la función para crear un objeto de un tipo dado. Inicializa sus valores "tipo",
+// "sprite" y "posición" dependiendo del tipo indicado. La posición por defecto es "X=0" "Y=0"
 //
 // Por defecto, los objetos creados están activos (la variable "activo"=1) 
 

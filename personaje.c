@@ -2,7 +2,7 @@
 
 
 ////////////////////////////////////////////////////////
-//Añadir función para crear un personaje con valores por defecto (todo a 0).
+// Aniadir función para crear un personaje con valores por defecto (todo a 0).
 
 personaje_t CrearPersonajePrincipal()
 {

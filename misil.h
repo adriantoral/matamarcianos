@@ -2,7 +2,7 @@
 #define __MISIL_H__
 
 #include "tipos.h"
-misil_t CrearMisil();
 
+misil_t CrearMisil();
 
 #endif

@@ -21,7 +21,7 @@ int main(int argc, char** argv)
 	// Dibujar el tablero (llamar a la función indicada
 	dibujaTablero(tablero, NFILAS, NCOLUMNAS);
 	
-	//terminar
+	// Terminar
 }
 
 

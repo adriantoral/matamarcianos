@@ -1,7 +1,7 @@
 #include "enemigo.h"
 
 ////////////////////////////
-//Añadir función para crear un enemigo con valores por defecto (todo a 0).
+// Aniadir función para crear un enemigo con valores por defecto (todo a 0).
 
 enemigo_t CrearEnemigo()
 {
