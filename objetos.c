@@ -13,8 +13,8 @@ objeto_t CrearObjeto(tipoObjeto_e tipo)
 {
 	objeto_t objeto;
 
-	objeto.x = 0;
-	objeto.y = 0;
+	objeto.posicion.x = 0;
+	objeto.posicion.y = 0;
 	objeto.esta_activo = 1;
 	objeto.tipo = tipo;
 

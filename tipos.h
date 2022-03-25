@@ -78,8 +78,7 @@ typedef struct personaje_t
 
 typedef struct objeto_t
 {
-	int x; // Posicion en el eje X del objecto
-	int y; // Posicion en el eje Y del objecto
+	movimiento_t posicion; // Posicion del obecto X e Y
 	int esta_activo; // 0 - Inactivo ; 1 - Activo
 	tipoObjeto_e tipo; // 0 - Enemigo ; 1 - Misil ; 2 - Personaje principal ; 3 - Empty
 	char sprite; // Sprite del objecto

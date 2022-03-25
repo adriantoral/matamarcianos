@@ -28,8 +28,8 @@ void iniciaTablero(objeto_t tablero[NFILAS][NCOLUMNAS], int numFilas, int numCol
 		for (int j=0; j<numColumnas; j++)
 		{
 			pTablero = &(tablero[i][j]);
-			pTablero->x = j; 
-			pTablero->y = i;
+			pTablero->posicion.x = j;
+			pTablero->posicion.y = i;
 			pTablero->esta_activo = 0;
 			pTablero->sprite = ' ';
 		}
@@ -44,8 +44,8 @@ void iniciaTablero(objeto_t tablero[NFILAS][NCOLUMNAS], int numFilas, int numCol
 
 		pTablero = &(tablero[y][x]);
 		*pTablero = CrearObjeto(enemigo);
-		pTablero->x = x;
-		pTablero->y = y;
+		pTablero->posicion.x = x;
+		pTablero->posicion.y = y;
 	}
 
 	// Numero de misiles entre 2 y 5
@@ -58,8 +58,8 @@ void iniciaTablero(objeto_t tablero[NFILAS][NCOLUMNAS], int numFilas, int numCol
 
 		pTablero = &(tablero[y][x]);
 		*pTablero = CrearObjeto(misil);
-		pTablero->x = x;
-		pTablero->y = y;
+		pTablero->posicion.x = x;
+		pTablero->posicion.y = y;
 	}
 
 	//El  personaje principal está en la fila más inferior del tablero, en una columna aleatoria
@@ -68,8 +68,8 @@ void iniciaTablero(objeto_t tablero[NFILAS][NCOLUMNAS], int numFilas, int numCol
 
 	pTablero = &(tablero[y][x]);
 	*pTablero = CrearObjeto(personaje);
-	pTablero->x = x;
-	pTablero->y = y;
+	pTablero->posicion.x = x;
+	pTablero->posicion.y = y;
 }
 
 void dibujaTablero(objeto_t tablero[NFILAS][NCOLUMNAS], int numFilas, int numColumnas)
