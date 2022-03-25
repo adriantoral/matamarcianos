@@ -23,7 +23,8 @@ typedef enum tipoObjeto_e
 typedef enum direccion_e
 {
 	ascendente,
-	descendente
+	descendente,
+	quieto
 } direccion_e;
 
 //////////////////////////////////////////////////////////////////////
@@ -57,7 +58,7 @@ typedef struct enemigo_t
 typedef struct misil_t
 {
 	int danio; // Danio causado por el misil (0-50)
-	direccion_e direccion; // 0 - Ascendente ; 1 - Descendente
+	direccion_e direccion; // 0 - Ascendente ; 1 - Descendente ; 2 - Quieto
 } misil_t;
 
 //////////////////////////////////////////////////////////////////////
@@ -80,7 +81,7 @@ typedef struct objeto_t
 	int x; // Posicion en el eje X del objecto
 	int y; // Posicion en el eje Y del objecto
 	int esta_activo; // 0 - Inactivo ; 1 - Activo
-	tipoObjeto_e tipo; // 0 - Enemigo ; 1 - Misil ; 2 - Personaje principal
+	tipoObjeto_e tipo; // 0 - Enemigo ; 1 - Misil ; 2 - Personaje principal ; 3 - Empty
 	char sprite; // Sprite del objecto
 	union
 	{
