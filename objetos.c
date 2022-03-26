@@ -33,6 +33,10 @@ objeto_t CrearObjeto(tipoObjeto_e tipo)
 		objeto.sprite = 'A';
 		objeto.personaje = CrearPersonajePrincipal();
 	}
+	else if (tipo == empty)
+	{
+		objeto.sprite = ' ';
+	}
 
 	return objeto;
 }
