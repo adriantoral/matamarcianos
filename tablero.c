@@ -28,10 +28,10 @@ void iniciaTablero(objeto_t tablero[NFILAS][NCOLUMNAS], int numFilas, int numCol
 		for (int j=0; j<numColumnas; j++)
 		{
 			pTablero = &(tablero[i][j]);
+			*pTablero = CrearObjeto(empty);
 			pTablero->x = j; 
 			pTablero->y = i;
 			pTablero->esta_activo = 0;
-			pTablero->sprite = ' ';
 		}
 
 	// Numero de enemigos entre 1 y 3
