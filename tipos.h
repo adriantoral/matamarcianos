@@ -34,11 +34,11 @@ typedef enum direccion_e
 // Estructura "movimiento_t" usada por los enemigos, indica la dirección del siguiente movimiento
 
 
-typedef struct movimiento_t
+typedef struct intVector2D_t
 {
 	int x; // Movimiento en el eje X
 	int y; // Movimineto en el eje Y
-} movimiento_t;
+} intVector2D_t, movimiento_t, posicion_t;
 
 
 //////////////////////////////////////////////////////////////////////
@@ -48,7 +48,7 @@ typedef struct enemigo_t
 {
 	int vida; // Vida actual del enemigo (0-99)
 	int puntuacion; // Puntuacion recibida por el usuario al matar al enemigo (0-1000)
-	movimiento_t movimientos[MOVIMIENTOS]; // Array del movimiento
+	movimiento_t movimientos[MOVIMIENTOS]; // Array del movimiento (intVector2D_t [i]array{})
 } enemigo_t;
 
 //////////////////////////////////////////////////////////////////////
@@ -78,7 +78,7 @@ typedef struct personaje_t
 
 typedef struct objeto_t
 {
-	movimiento_t posicion; // Posicion del obecto X e Y
+	posicion_t posicion; // Posicion del obecto X e Y (intVector2D_t)
 	int esta_activo; // 0 - Inactivo ; 1 - Activo
 	tipoObjeto_e tipo; // 0 - Enemigo ; 1 - Misil ; 2 - Personaje principal ; 3 - Empty
 	char sprite; // Sprite del objecto
