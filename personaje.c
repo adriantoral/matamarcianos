@@ -13,3 +13,4 @@ personaje_t CrearPersonajePrincipal()
 
 	return personaje;
 }
+

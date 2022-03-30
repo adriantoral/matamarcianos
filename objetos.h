@@ -6,3 +6,4 @@
 objeto_t CrearObjeto(tipoObjeto_e tipo);
 
 #endif
+

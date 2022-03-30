@@ -8,3 +8,4 @@ all: $(OBJFILES)
 	$(COMPILER) -g -c $< -o $@
 clean:
 	rm $(OBJFILES)
+
