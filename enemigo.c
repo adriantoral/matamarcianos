@@ -17,3 +17,4 @@ enemigo_t CrearEnemigo()
 
 	return enemigo;
 }
+

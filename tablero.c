@@ -15,13 +15,12 @@ void iniciaTablero(objeto_t tablero[NFILAS][NCOLUMNAS], int numFilas, int numCol
 
 	// Variables AUX
 	objeto_t *pTablero = NULL;
-	int nEnemigos = (rand() % 3) + 1, // 1-3
-		nMisiles = (rand() % 4) + 2; // 2-5
 
-	/* Generar objetos vacios */
-	/* for (int i=0; i<numFilas; i++) */
-	/* 	for (int j=0; j<numColumnas; j++) */
-	/* 		tablero[i][j] = CrearObjeto(empty); */	
+	int nEnemigos = (rand() % 3) + 1, // 1-3
+		nMisiles  = (rand() % 4) + 2; // 2-5
+
+	/* Debug de numero de enemigos y misiles */
+	/* printf("Enemigos : %d\nMisiles : %d\n", nEnemigos, nMisiles); */
 
 	// Inicializar el tablero con objetos "no activos"
 	for (int i=0; i<numFilas; i++)
@@ -37,39 +36,51 @@ void iniciaTablero(objeto_t tablero[NFILAS][NCOLUMNAS], int numFilas, int numCol
 	// Numero de enemigos entre 1 y 3
 	// Aniadir Enemigos
 		// La posición está en la mitad superior del tablero (Y<=(numFilas/2))
-	for (int i=1; i<= nEnemigos; i++)
+	for (int i=1; i<=nEnemigos; i++)
 	{
-		int x = rand() % numColumnas,
-			y = rand() % (numFilas / 2);
+		int xEnemigo = 0,
+			yEnemigo = 0;
 
-		pTablero = &(tablero[y][x]);
+		do
+		{
+			xEnemigo = rand() % numColumnas;
+			yEnemigo = rand() % (numFilas / 2);
+		}while(tablero[yEnemigo][xEnemigo].esta_activo);
+
+		pTablero = &(tablero[yEnemigo][xEnemigo]);
 		*pTablero = CrearObjeto(enemigo);
-		pTablero->x = x;
-		pTablero->y = y;
+		pTablero->x = xEnemigo;
+		pTablero->y = yEnemigo;
 	}
 
 	// Numero de misiles entre 2 y 5
 	// Aniadir misiles
 		// Cualquier posición del tablero
-	for (int i=1; i<= nMisiles; i++)
+	for (int i=1; i<=nMisiles; i++)
 	{
-		int x = rand() % numColumnas,
-			y = rand() % numFilas;
+		int xMisil = 0,
+			yMisil = 0;
 
-		pTablero = &(tablero[y][x]);
+		do
+		{
+			xMisil = rand() % numColumnas,
+			yMisil = rand() % numFilas;
+		}while(tablero[yMisil][xMisil].esta_activo);
+
+		pTablero = &(tablero[yMisil][xMisil]);
 		*pTablero = CrearObjeto(misil);
-		pTablero->x = x;
-		pTablero->y = y;
+		pTablero->x = xMisil;
+		pTablero->y = yMisil;
 	}
 
 	//El  personaje principal está en la fila más inferior del tablero, en una columna aleatoria
-	int x = rand() % numColumnas,
-		y = numFilas - 1;
+	int xPersonaje = rand() % numColumnas,
+		yPersonaje = numFilas - 1;
 
-	pTablero = &(tablero[y][x]);
+	pTablero = &(tablero[yPersonaje][xPersonaje]);
 	*pTablero = CrearObjeto(personaje);
-	pTablero->x = x;
-	pTablero->y = y;
+	pTablero->x = xPersonaje;
+	pTablero->y = yPersonaje;
 }
 
 void dibujaTablero(objeto_t tablero[NFILAS][NCOLUMNAS], int numFilas, int numColumnas)
@@ -105,5 +116,4 @@ void dibujaTablero(objeto_t tablero[NFILAS][NCOLUMNAS], int numFilas, int numCol
 		}
 	}
 }
-
 
