@@ -9,12 +9,12 @@
 //
 // Por defecto, los objetos creados están activos (la variable "activo"=1) 
 
-objeto_t CrearObjeto(tipoObjeto_e tipo)
+objeto_t CrearObjeto(tipoObjeto_e tipo, int x, int y)
 {
 	objeto_t objeto;
 
-	objeto.posicion.x = 0;
-	objeto.posicion.y = 0;
+	objeto.posicion.x = x;
+	objeto.posicion.y = y;
 	objeto.esta_activo = 1;
 	objeto.tipo = tipo;
 

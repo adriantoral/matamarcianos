@@ -1,6 +1,6 @@
 SRC= $(wildcard *.c)
 OBJFILES= $(SRC:.c=.o)
-COMPILER= gcc
+COMPILER= g++
 PROGRAMNAME= asciiInvaders.exe
 all: $(OBJFILES)
 	$(COMPILER) -g $(OBJFILES) -o $(PROGRAMNAME)

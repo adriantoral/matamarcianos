@@ -27,15 +27,13 @@ void iniciaTablero(objeto_t tablero[NFILAS][NCOLUMNAS], int numFilas, int numCol
 		for (int j=0; j<numColumnas; j++)
 		{
 			pTablero = &(tablero[i][j]);
-			*pTablero = CrearObjeto(empty);
-			pTablero->posicion.x = j;
-			pTablero->posicion.y = i;
+			*pTablero = CrearObjeto(empty, j, i);
 			pTablero->esta_activo = 0;
 		}
 
 	// Numero de enemigos entre 1 y 3
 	// Aniadir Enemigos
-		// La posición está en la mitad superior del tablero (Y<=(numFilas/2))
+	// La posición está en la mitad superior del tablero (Y<=(numFilas/2))
 	for (int i=1; i<=nEnemigos; i++)
 	{
 		int xEnemigo = 0,
@@ -48,14 +46,12 @@ void iniciaTablero(objeto_t tablero[NFILAS][NCOLUMNAS], int numFilas, int numCol
 		}while(tablero[yEnemigo][xEnemigo].esta_activo);
 
 		pTablero = &(tablero[yEnemigo][xEnemigo]);
-		*pTablero = CrearObjeto(enemigo);
-		pTablero->posicion.x = xEnemigo;
-		pTablero->posicion.y = yEnemigo;
+		*pTablero = CrearObjeto(enemigo, xEnemigo, yEnemigo);
 	}
 
 	// Numero de misiles entre 2 y 5
 	// Aniadir misiles
-		// Cualquier posición del tablero
+	// Cualquier posición del tablero
 	for (int i=1; i<=nMisiles; i++)
 	{
 		int xMisil = 0,
@@ -64,13 +60,11 @@ void iniciaTablero(objeto_t tablero[NFILAS][NCOLUMNAS], int numFilas, int numCol
 		do
 		{
 			xMisil = rand() % numColumnas,
-			yMisil = rand() % numFilas;
+				   yMisil = rand() % numFilas;
 		}while(tablero[yMisil][xMisil].esta_activo);
 
 		pTablero = &(tablero[yMisil][xMisil]);
-		*pTablero = CrearObjeto(misil);
-		pTablero->posicion.x = xMisil;
-		pTablero->posicion.y = yMisil;
+		*pTablero = CrearObjeto(misil, xMisil, yMisil);
 	}
 
 	//El  personaje principal está en la fila más inferior del tablero, en una columna aleatoria
@@ -78,18 +72,16 @@ void iniciaTablero(objeto_t tablero[NFILAS][NCOLUMNAS], int numFilas, int numCol
 		yPersonaje = numFilas - 1;
 
 	pTablero = &(tablero[yPersonaje][xPersonaje]);
-	*pTablero = CrearObjeto(personaje);
-	pTablero->posicion.x = xPersonaje;
-	pTablero->posicion.y = yPersonaje;
+	*pTablero = CrearObjeto(personaje, xPersonaje, yPersonaje);
 }
 
 void dibujaTablero(objeto_t tablero[NFILAS][NCOLUMNAS], int numFilas, int numColumnas)
 {
 	// Por cada fila,columna de tablero
-		// Si el objeto está activo
-			// Mostrar su sprite
-		// Si no
-			// Mostrar un espacio en blanco
+	// Si el objeto está activo
+	// Mostrar su sprite
+	// Si no
+	// Mostrar un espacio en blanco
 	for (int i=0; i<numFilas; i++)
 	{
 		if (i == numFilas - numFilas) 

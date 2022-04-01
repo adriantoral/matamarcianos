@@ -3,7 +3,7 @@
 
 #include "tipos.h"
 
-objeto_t CrearObjeto(tipoObjeto_e tipo);
+objeto_t CrearObjeto(tipoObjeto_e tipo, int x=0, int y=0);
 
 #endif
 
