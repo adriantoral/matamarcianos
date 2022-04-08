@@ -11,7 +11,6 @@
 
 int main(int argc, char** argv)
 {
-
 	// Crear un array doble de tamaño "NFILAS"x"NCOLUMNAS" de tipo "objeto_t", llamado "tablero.
 	objeto_t tablero[NFILAS][NCOLUMNAS];
 

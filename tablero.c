@@ -78,10 +78,10 @@ void iniciaTablero(objeto_t tablero[NFILAS][NCOLUMNAS], int numFilas, int numCol
 void dibujaTablero(objeto_t tablero[NFILAS][NCOLUMNAS], int numFilas, int numColumnas)
 {
 	// Por cada fila,columna de tablero
-	// Si el objeto está activo
-	// Mostrar su sprite
-	// Si no
-	// Mostrar un espacio en blanco
+	//		Si el objeto está activo
+	//			Mostrar su sprite
+	//		Si no
+	//			Mostrar un espacio en blanco
 	for (int i=0; i<numFilas; i++)
 	{
 		if (i == numFilas - numFilas) 

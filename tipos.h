@@ -49,6 +49,8 @@ typedef struct enemigo_t
 	int vida; // Vida actual del enemigo (0-99)
 	int puntuacion; // Puntuacion recibida por el usuario al matar al enemigo (0-1000)
 	movimiento_t movimientos[MOVIMIENTOS]; // Array del movimiento (intVector2D_t [i]array{})
+	int indice_movimiento; // Indice del array movimientos
+	int tamanio_movimientos; // Tamanio del array movimientos
 } enemigo_t;
 
 //////////////////////////////////////////////////////////////////////

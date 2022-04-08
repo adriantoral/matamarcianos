@@ -9,6 +9,9 @@ enemigo_t CrearEnemigo()
 
 	enemigo.vida = 0;
 	enemigo.puntuacion = 0;
+	enemigo.indice_movimiento = 0;
+	enemigo.tamanio_movimientos = MOVIMIENTOS;
+
 	for(int i=0; i<MOVIMIENTOS; i++)
 	{
 		enemigo.movimientos[i].x = 0;
