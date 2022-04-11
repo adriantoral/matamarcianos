@@ -8,7 +8,28 @@
 #include "personaje.h"
 #include "tipos.h"
 
-void iniciaTablero(objeto_t tablero[NFILAS][NCOLUMNAS], int numFilas, int numColumnas)
+void liberaTablero(objeto_t **tablero, int numFilas)
+{
+	for (int i=0; i<numFilas; i++) free(tablero[i]);
+	free(tablero);
+}
+
+objeto_t **reservaTablero(int numFilas, int numColumnas)
+{
+	// Declarar un puntero doble de objeto_t llamado tablero
+	objeto_t **tablero = NULL;
+
+	// Iniciar la primera dimensión del puntero doble “tablero” con un array de numFilas de punteros a objeto_t
+	tablero = (objeto_t **)malloc(sizeof(objeto_t) * numFilas);
+
+	// Inicializar esa fila del tablero con un array de objeto_t de tamaño “numColumnas"
+	for (int i=0; i<numFilas; i++) tablero[i] = (objeto_t *)malloc(sizeof(objeto_t) * numColumnas);
+
+	//devolver el array doble tablero
+	return tablero;
+}
+
+void iniciaTablero(objeto_t **tablero, int numFilas, int numColumnas)
 {
 	// Iniciar el random
 	srand(getpid());
@@ -75,7 +96,7 @@ void iniciaTablero(objeto_t tablero[NFILAS][NCOLUMNAS], int numFilas, int numCol
 	*pTablero = CrearObjeto(personaje, xPersonaje, yPersonaje);
 }
 
-void dibujaTablero(objeto_t tablero[NFILAS][NCOLUMNAS], int numFilas, int numColumnas)
+void dibujaTablero(objeto_t **tablero, int numFilas, int numColumnas)
 {
 	// Por cada fila,columna de tablero
 	//		Si el objeto está activo

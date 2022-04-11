@@ -6,8 +6,10 @@
 
 #include "tipos.h"
 
-void iniciaTablero(objeto_t tablero[NFILAS][NCOLUMNAS], int numFilas, int numColumnas);
-void dibujaTablero(objeto_t tablero[NFILAS][NCOLUMNAS], int numFilas, int numColumnas);
+void iniciaTablero(objeto_t **tablero, int numFilas, int numColumnas);
+void dibujaTablero(objeto_t **tablero, int numFilas, int numColumnas);
+objeto_t **reservaTablero(int numFilas, int numColumnas);
+void liberaTablero(objeto_t **tablero, int numFilas);
 
 #endif
 
