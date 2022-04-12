@@ -15,3 +15,14 @@ int leeNumero()
 
 	return numero;
 }
+
+char leeCaracter()
+{
+	char caracter = '\0';
+
+	caracter = getchar();
+	limpiarBuffer;
+
+	return caracter;
+}
+

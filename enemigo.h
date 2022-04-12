@@ -4,6 +4,7 @@
 #include "tipos.h"
 
 enemigo_t CrearEnemigo();
+void mueveEnemigo(objeto_t* objeto, int numFilas, int numColumnas);
 
 #endif
 

@@ -36,8 +36,14 @@ int main(int argc, char** argv)
 	// Iniciar el tablero (llamar a la función indicada)
 	iniciaTablero(tablero, numFilas, numColumnas);
 
-	// Dibujar el tablero (llamar a la función indicada
-	dibujaTablero(tablero, numFilas, numColumnas);
+	do
+	{
+		// Dibujar el tablero (llamar a la función indicada)
+		dibujaTablero(tablero, numFilas, numColumnas);
+
+		// Actualiza el tablero
+		actualizaTablero(tablero, numFilas, numColumnas);
+	}while(buscaPersonaje(tablero, numFilas, numColumnas));
 
 	// Terminar
 	liberaTablero(tablero, numFilas);

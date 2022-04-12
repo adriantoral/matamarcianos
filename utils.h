@@ -4,5 +4,6 @@
 #define limpiarBuffer while(getchar() != '\n');
 
 int leeNumero();
+char leeCaracter();
 
 #endif

@@ -1,12 +1,25 @@
-#include "tablero.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+
+#include "tablero.h"
 #include "enemigo.h"
 #include "misil.h"
 #include "objetos.h"
 #include "personaje.h"
 #include "tipos.h"
+
+int buscaPersonaje(objeto_t **tablero, int numFilas, int numColumnas)
+{
+	for (int i=0; i<numFilas; i++)
+		for (int j=0; j<numColumnas; j++)
+		{
+			objeto_t *objeto = &(tablero[i][j]);
+			if (objeto->esta_activo && objeto->tipo == personaje) return 1;
+		}
+
+	return 0;
+}
 
 void liberaTablero(objeto_t **tablero, int numFilas)
 {
@@ -29,6 +42,81 @@ objeto_t **reservaTablero(int numFilas, int numColumnas)
 	return tablero;
 }
 
+void actualizaTablero(objeto_t **tablero, int numFilas, int numColumnas)
+{
+	// Por cada posición del tablero
+	// Si es un objeto activo
+	// Obtener el tipo del objeto
+	// Llamar a su función de movimiento: mueveEnemigo, mueveMisil o muevePersonaje
+	for (int i=0; i<numFilas; i++)
+		for (int j=0; j<numColumnas; j++)
+		{
+			objeto_t *objeto = &(tablero[i][j]);
+
+			if (objeto->esta_activo)
+			{
+				switch (objeto->tipo)
+				{
+					case enemigo:
+						mueveEnemigo(objeto, numFilas, numColumnas);
+						break;
+
+					case misil:
+						mueveMisil(objeto, numFilas, numColumnas);
+						break;
+
+					case personaje:
+						muevePersonaje(objeto, numFilas, numColumnas);
+						break;
+
+					case empty:
+						break;
+				}
+			}
+		}
+
+	// Después de haber movido todos los objetos, actualizar sus posiciones dentro del tablero
+	// Por cada objeto activo del tablero (recorrerlo con un for doble)
+	// Obtener su nueva posición X,Y almacenada en el objeto
+	// Comprobar si debe moverse (las nuevas posiciones son distintas de la posición actual)
+	for (int i=0; i<numFilas; i++)
+		for (int j=0; j<numColumnas; j++)
+		{
+			objeto_t *objeto = &(tablero[i][j]);
+			objeto_t *objeto_siguiente = &(tablero[objeto->posicion.y][objeto->posicion.x]);
+
+			if (objeto->posicion.x != j || objeto->posicion.y != i)
+			{
+				// Si se mueve
+				// Comprobar si en esa nueva posición ya hay un objeto activo
+				// Si es así, significa que hay una colisión, se resolverán de la siguiente manera
+				// Si colisiona un Misil con un Enemigo, se desactivan ambos
+				// Si colisiona un Misil con el Personaje, se desactivan ambos
+				// En otro caso,(no hay objeto activo) se mueve el objeto a la nueva posición
+				// Se copia el objeto a la posición X Y del tablero indicada por sus variables de posición
+				// Se desactiva el objeto que estaba en la posición original (variable activo del objeto accedido con los contadores del “for” a false)
+				switch (objeto->tipo)
+				{
+					case enemigo:
+					case misil:
+					case personaje:
+						if ((objeto_siguiente->tipo == misil && objeto->tipo == enemigo) || (objeto_siguiente->tipo == enemigo && objeto->tipo == misil) || (objeto_siguiente->tipo == misil && objeto->tipo == personaje))
+						{
+							objeto->esta_activo = 0;
+							objeto_siguiente->esta_activo = 0;
+						}
+						break;
+
+					case empty:
+						break;
+				}
+
+				*objeto_siguiente = *objeto;
+				*objeto = CrearObjeto(empty, j, i);
+			}
+		}
+}
+
 void iniciaTablero(objeto_t **tablero, int numFilas, int numColumnas)
 {
 	// Iniciar el random
@@ -49,7 +137,6 @@ void iniciaTablero(objeto_t **tablero, int numFilas, int numColumnas)
 		{
 			pTablero = &(tablero[i][j]);
 			*pTablero = CrearObjeto(empty, j, i);
-			pTablero->esta_activo = 0;
 		}
 
 	// Numero de enemigos entre 1 y 3
@@ -115,7 +202,7 @@ void dibujaTablero(objeto_t **tablero, int numFilas, int numColumnas)
 		for (int j=0; j<numColumnas; j++)
 		{
 			if (j == numColumnas - numColumnas) printf("[");
-			printf("%c", tablero[i][j].sprite);
+			printf("%c", tablero[i][j].esta_activo ? tablero[i][j].sprite : ' ');
 			if (j == numColumnas - 1) printf("]");
 		}
 

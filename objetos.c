@@ -36,6 +36,7 @@ objeto_t CrearObjeto(tipoObjeto_e tipo, int x, int y)
 	else if (tipo == empty)
 	{
 		objeto.sprite = ' ';
+		objeto.esta_activo = 0;
 	}
 
 	return objeto;

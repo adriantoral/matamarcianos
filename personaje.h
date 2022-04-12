@@ -4,6 +4,7 @@
 #include "tipos.h"
 
 personaje_t CrearPersonajePrincipal();
+void muevePersonaje(objeto_t* objeto, int numFilas, int numColumnas);
 
 #endif
 
