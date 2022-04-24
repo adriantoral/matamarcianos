@@ -1,3 +1,7 @@
+/* Author : Adrian Toral */
+/* Codigo : Matamarcianos en c */
+/* Fecha  : 24-04-2022 */
+
 #include "objetos.h"
 #include "misil.h"
 #include "personaje.h"

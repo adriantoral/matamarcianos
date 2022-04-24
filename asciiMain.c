@@ -1,3 +1,7 @@
+/* Author : Adrian Toral */
+/* Codigo : Matamarcianos en c */
+/* Fecha  : 24-04-2022 */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -5,7 +9,6 @@
 #include "objetos.h"
 #include "tablero.h"
 #include "utils.h"
-
 
 /////////////////////////////////////////////////
 // Programa principal
@@ -43,7 +46,8 @@ int main(int argc, char** argv)
 
 		// Actualiza el tablero
 		actualizaTablero(tablero, numFilas, numColumnas);
-	}while(buscaPersonaje(tablero, numFilas, numColumnas));
+	}
+	while(buscaPersonaje(tablero, numFilas, numColumnas));
 
 	// Terminar
 	liberaTablero(tablero, numFilas);

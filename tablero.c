@@ -1,3 +1,7 @@
+/* Author : Adrian Toral */
+/* Codigo : Matamarcianos en c */
+/* Fecha  : 24-04-2022 */
+
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -95,20 +99,19 @@ void actualizaTablero(objeto_t **tablero, int numFilas, int numColumnas)
 				// En otro caso,(no hay objeto activo) se mueve el objeto a la nueva posición
 				// Se copia el objeto a la posición X Y del tablero indicada por sus variables de posición
 				// Se desactiva el objeto que estaba en la posición original (variable activo del objeto accedido con los contadores del “for” a false)
-				switch (objeto->tipo)
+				if (objeto_siguiente->esta_activo)
 				{
-					case enemigo:
-					case misil:
-					case personaje:
-						if ((objeto_siguiente->tipo == misil && objeto->tipo == enemigo) || (objeto_siguiente->tipo == enemigo && objeto->tipo == misil) || (objeto_siguiente->tipo == misil && objeto->tipo == personaje))
-						{
-							objeto->esta_activo = 0;
-							objeto_siguiente->esta_activo = 0;
-						}
-						break;
+					switch (objeto->tipo)
+					{
+						case enemigo:
+						case misil:
+						case personaje:
+							if ((objeto_siguiente->tipo == misil && objeto->tipo == enemigo) || (objeto_siguiente->tipo == enemigo && objeto->tipo == misil) || (objeto_siguiente->tipo == misil && objeto->tipo == personaje)) objeto->esta_activo = 0;
+							break;
 
-					case empty:
-						break;
+						case empty:
+							break;
+					}
 				}
 
 				*objeto_siguiente = *objeto;
@@ -151,7 +154,8 @@ void iniciaTablero(objeto_t **tablero, int numFilas, int numColumnas)
 		{
 			xEnemigo = rand() % numColumnas;
 			yEnemigo = rand() % (numFilas / 2);
-		}while(tablero[yEnemigo][xEnemigo].esta_activo);
+		}
+		while(tablero[yEnemigo][xEnemigo].esta_activo);
 
 		pTablero = &(tablero[yEnemigo][xEnemigo]);
 		*pTablero = CrearObjeto(enemigo, xEnemigo, yEnemigo);
@@ -169,7 +173,8 @@ void iniciaTablero(objeto_t **tablero, int numFilas, int numColumnas)
 		{
 			xMisil = rand() % numColumnas,
 				   yMisil = rand() % numFilas;
-		}while(tablero[yMisil][xMisil].esta_activo);
+		}
+		while(tablero[yMisil][xMisil].esta_activo);
 
 		pTablero = &(tablero[yMisil][xMisil]);
 		*pTablero = CrearObjeto(misil, xMisil, yMisil);

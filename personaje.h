@@ -1,3 +1,7 @@
+/* Author : Adrian Toral */
+/* Codigo : Matamarcianos en c */
+/* Fecha  : 24-04-2022 */
+
 #ifndef __PERSONAJE_H__
 #define __PERSONAJE_H__
 

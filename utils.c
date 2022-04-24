@@ -1,3 +1,7 @@
+/* Author : Adrian Toral */
+/* Codigo : Matamarcianos en c */
+/* Fecha  : 24-04-2022 */
+
 #include <stdio.h>
 #include "utils.h"
 
@@ -11,7 +15,8 @@ int leeNumero()
 		error = scanf("%d", &numero);
 		limpiarBuffer;
 		if (!error) printf("[!] Numero no valido. Prueba de nuevo\n");
-	}while(!error);
+	}
+	while(!error);
 
 	return numero;
 }

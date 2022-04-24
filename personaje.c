@@ -1,3 +1,7 @@
+/* Author : Adrian Toral */
+/* Codigo : Matamarcianos en c */
+/* Fecha  : 24-04-2022 */
+
 #include "personaje.h"
 #include "utils.h"
 #include <stdio.h>
@@ -28,13 +32,14 @@ void muevePersonaje(objeto_t* objeto, int numFilas, int numColumnas)
 	{
 		printf("[!] Mueva al personaje\n\tA) Izquierda\n\tD) Derecha\n\tS) Detener el juego\nOpcion:\n");
 		caracter_direccion = leeCaracter();
-	}while(caracter_direccion != 'a' && caracter_direccion != 'd' && caracter_direccion != 's');
+	}
+	while(caracter_direccion != 'a' && caracter_direccion != 'd' && caracter_direccion != 's' && caracter_direccion != 'A' && caracter_direccion != 'D' && caracter_direccion != 'S');
 
 	// Leer movimiento
 	// Si se ha presionado “A”, mover una unidad a la derecha
 	// Si se ha presionado “D”: mover una unidad a la izquierda
 	// Si se ha presionado “S”: El personaje deja de estar activo
-	direccion = caracter_direccion == 'a' ? -1 : caracter_direccion == 'd' ? 1 : 0;
+	direccion = caracter_direccion == 'a' || caracter_direccion == 'A' ? -1 : caracter_direccion == 'd' || caracter_direccion == 'D' ? 1 : 0;
 	if (!direccion) objeto->esta_activo = 0;
 
 	// Comprobar coordenadas correctas:
