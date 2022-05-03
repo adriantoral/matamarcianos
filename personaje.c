@@ -1,6 +1,6 @@
 /* Author : Adrian Toral */
 /* Codigo : Matamarcianos en c */
-/* Fecha  : 24-04-2022 */
+/* Fecha  : 03-05-2022 */
 
 #include "personaje.h"
 #include "utils.h"
@@ -18,6 +18,18 @@ personaje_t CrearPersonajePrincipal()
 	personaje.puntuacion = 0; 
 
 	return personaje;
+}
+
+personaje_t CrearPersonajePrincipalConDatos(int vida, int puntuacion)
+{
+	personaje_t personaje = CrearPersonajePrincipal();
+
+	// Inicializar una estructura de tipo personaje_t con los 
+	// datos de vida y puntuacion
+	personaje.vida = vida;
+	personaje.puntuacion = puntuacion;
+
+	return personaje;	
 }
 
 void muevePersonaje(objeto_t* objeto, int numFilas, int numColumnas)

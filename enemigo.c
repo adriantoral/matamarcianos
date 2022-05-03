@@ -1,6 +1,6 @@
 /* Author : Adrian Toral */
 /* Codigo : Matamarcianos en c */
-/* Fecha  : 24-04-2022 */
+/* Fecha  : 03-05-2022 */
 
 #include "enemigo.h"
 
@@ -26,6 +26,20 @@ enemigo_t CrearEnemigo()
 	}
 
 	return enemigo;
+}
+
+enemigo_t CrearEnemigoConDatos(int vida, int puntuacion, movimiento_t *movimientos)
+{
+        enemigo_t enemigo = CrearEnemigo();
+
+        // Inicializar una estructura de tipo enemigo_t con los datos de vida, puntuacion
+        // y movimientos suministrados
+        // El array “movimientos” debe tener 4 elementos como mínimo
+
+        enemigo.vida = vida;
+        enemigo.puntuacion = puntuacion;
+
+        return enemigo;
 }
 
 void mueveEnemigo(objeto_t* objeto, int numFilas, int numColumnas)

@@ -1,6 +1,6 @@
 /* Author : Adrian Toral */
 /* Codigo : Matamarcianos en c */
-/* Fecha  : 24-04-2022 */
+/* Fecha  : 03-05-2022 */
 
 #include "misil.h"
 
@@ -13,6 +13,18 @@ misil_t CrearMisil()
 
 	misil.danio = 0;
 	misil.direccion = ascendente;
+
+	return misil;
+}
+
+misil_t CrearMisilConDatos(int danio, direccion_e direccion)
+{
+	misil_t misil = CrearMisil();
+	
+	// Inicializar una estructura de tipo misil _t con los
+	// datos de danio y puntuacion suministrados
+	misil.danio = danio;
+	misil.direccion = direccion;
 
 	return misil;
 }
