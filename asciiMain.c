@@ -1,6 +1,6 @@
 /* Author : Adrian Toral */
 /* Codigo : Matamarcianos en c */
-/* Fecha  : 24-04-2022 */
+/* Fecha  : 03-05-2022 */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -34,7 +34,7 @@ int main(int argc, char** argv)
 	}
 
 	// Crear un array doble de tamaño "NFILAS"x"NCOLUMNAS" de tipo "objeto_t", llamado "tablero.
-	objeto_t **tablero = reservaTablero(numFilas, numColumnas);
+	t_objeto **tablero = reservaTablero(numFilas, numColumnas);
 
 	// Iniciar el tablero (llamar a la función indicada)
 	iniciaTablero(tablero, numFilas, numColumnas);

@@ -10,29 +10,29 @@
 ////////////////////////////////////////////////////////
 // Aniadir función para crear un personaje con valores por defecto (todo a 0).
 
-personaje_t CrearPersonajePrincipal()
+t_personaje CrearPersonajePrincipal()
 {
-	personaje_t personaje;
+	t_personaje personaje;
 
 	personaje.vida = 0;
-	personaje.puntuacion = 0; 
+	personaje.puntuacion = 0;
 
 	return personaje;
 }
 
-personaje_t CrearPersonajePrincipalConDatos(int vida, int puntuacion)
+t_personaje CrearPersonajePrincipalConDatos(int vida, int puntuacion)
 {
-	personaje_t personaje = CrearPersonajePrincipal();
+	t_personaje personaje = CrearPersonajePrincipal();
 
-	// Inicializar una estructura de tipo personaje_t con los 
+	// Inicializar una estructura de tipo personaje_t con los
 	// datos de vida y puntuacion
 	personaje.vida = vida;
 	personaje.puntuacion = puntuacion;
 
-	return personaje;	
+	return personaje;
 }
 
-void muevePersonaje(objeto_t* objeto, int numFilas, int numColumnas)
+void muevePersonaje(t_objeto* objeto, int numFilas, int numColumnas)
 {
 	//Pedir movimiento al usuario:
 	int direccion = 0,

@@ -7,9 +7,9 @@
 
 #include "tipos.h"
 
-misil_t CrearMisil();
-void mueveMisil(objeto_t* objeto, int numFilas, int numColumnas);
-misil_t CrearMisilConDatos(int danio, direccion_e direccion);
+t_misil CrearMisil();
+void mueveMisil(t_objeto* objeto, int numFilas, int numColumnas);
+t_misil CrearMisilConDatos(int danio, e_direccion direccion);
 
 #endif
 

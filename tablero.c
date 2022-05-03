@@ -13,40 +13,40 @@
 #include "personaje.h"
 #include "tipos.h"
 
-int buscaPersonaje(objeto_t **tablero, int numFilas, int numColumnas)
+int buscaPersonaje(t_objeto **tablero, int numFilas, int numColumnas)
 {
 	for (int i=0; i<numFilas; i++)
 		for (int j=0; j<numColumnas; j++)
 		{
-			objeto_t *objeto = &(tablero[i][j]);
-			if (objeto->esta_activo && objeto->tipo == personaje) return 1;
+			t_objeto *objeto = &(tablero[i][j]);
+			if (objeto->esta_activo && objeto->tipo == PERSONAJE) return 1;
 		}
 
 	return 0;
 }
 
-void liberaTablero(objeto_t **tablero, int numFilas)
+void liberaTablero(t_objeto **tablero, int numFilas)
 {
 	for (int i=0; i<numFilas; i++) free(tablero[i]);
 	free(tablero);
 }
 
-objeto_t **reservaTablero(int numFilas, int numColumnas)
+t_objeto **reservaTablero(int numFilas, int numColumnas)
 {
 	// Declarar un puntero doble de objeto_t llamado tablero
-	objeto_t **tablero = NULL;
+	t_objeto **tablero = NULL;
 
 	// Iniciar la primera dimensión del puntero doble “tablero” con un array de numFilas de punteros a objeto_t
-	tablero = (objeto_t **)malloc(sizeof(objeto_t *) * numFilas);
+	tablero = (t_objeto **)malloc(sizeof(t_objeto *) * numFilas);
 
 	// Inicializar esa fila del tablero con un array de objeto_t de tamaño “numColumnas"
-	for (int i=0; i<numFilas; i++) tablero[i] = (objeto_t *)malloc(sizeof(objeto_t) * numColumnas);
+	for (int i=0; i<numFilas; i++) tablero[i] = (t_objeto *)malloc(sizeof(t_objeto) * numColumnas);
 
 	//devolver el array doble tablero
 	return tablero;
 }
 
-void actualizaTablero(objeto_t **tablero, int numFilas, int numColumnas)
+void actualizaTablero(t_objeto **tablero, int numFilas, int numColumnas)
 {
 	// Por cada posición del tablero
 	// Si es un objeto activo
@@ -55,25 +55,25 @@ void actualizaTablero(objeto_t **tablero, int numFilas, int numColumnas)
 	for (int i=0; i<numFilas; i++)
 		for (int j=0; j<numColumnas; j++)
 		{
-			objeto_t *objeto = &(tablero[i][j]);
+			t_objeto *objeto = &(tablero[i][j]);
 
 			if (objeto->esta_activo)
 			{
 				switch (objeto->tipo)
 				{
-					case enemigo:
+					case ENEMIGO:
 						mueveEnemigo(objeto, numFilas, numColumnas);
 						break;
 
-					case misil:
+					case MISIL:
 						mueveMisil(objeto, numFilas, numColumnas);
 						break;
 
-					case personaje:
+					case PERSONAJE:
 						muevePersonaje(objeto, numFilas, numColumnas);
 						break;
 
-					case empty:
+					case VACIO:
 						break;
 				}
 			}
@@ -86,8 +86,8 @@ void actualizaTablero(objeto_t **tablero, int numFilas, int numColumnas)
 	for (int i=0; i<numFilas; i++)
 		for (int j=0; j<numColumnas; j++)
 		{
-			objeto_t *objeto = &(tablero[i][j]);
-			objeto_t *objeto_siguiente = &(tablero[objeto->posicion.y][objeto->posicion.x]);
+			t_objeto *objeto = &(tablero[i][j]);
+			t_objeto *objeto_siguiente = &(tablero[objeto->posicion.y][objeto->posicion.x]);
 
 			if (objeto->posicion.x != j || objeto->posicion.y != i)
 			{
@@ -101,22 +101,22 @@ void actualizaTablero(objeto_t **tablero, int numFilas, int numColumnas)
 				// Se desactiva el objeto que estaba en la posición original (variable activo del objeto accedido con los contadores del “for” a false)
 				if (objeto_siguiente->esta_activo)
 				{
-					if ((objeto_siguiente->tipo == misil && objeto->tipo == enemigo) || (objeto_siguiente->tipo == enemigo && objeto->tipo == misil) || (objeto_siguiente->tipo == misil && objeto->tipo == personaje)) objeto->esta_activo = 0;
+					if ((objeto_siguiente->tipo == MISIL && objeto->tipo == ENEMIGO) || (objeto_siguiente->tipo == ENEMIGO && objeto->tipo == MISIL) || (objeto_siguiente->tipo == MISIL && objeto->tipo == PERSONAJE)) objeto->esta_activo = 0;
 				}
 
 				*objeto_siguiente = *objeto;
-				*objeto = CrearObjeto(empty, j, i);
+				*objeto = CrearObjeto(VACIO, j, i);
 			}
 		}
 }
 
-void iniciaTablero(objeto_t **tablero, int numFilas, int numColumnas)
+void iniciaTablero(t_objeto **tablero, int numFilas, int numColumnas)
 {
 	// Iniciar el random
 	srand(getpid());
 
 	// Variables AUX
-	objeto_t *pTablero = NULL;
+	t_objeto *pTablero = NULL;
 
 	int nEnemigos = (rand() % 3) + 1, // 1-3
 		nMisiles  = (rand() % 4) + 2; // 2-5
@@ -129,7 +129,7 @@ void iniciaTablero(objeto_t **tablero, int numFilas, int numColumnas)
 		for (int j=0; j<numColumnas; j++)
 		{
 			pTablero = &(tablero[i][j]);
-			*pTablero = CrearObjeto(empty, j, i);
+			*pTablero = CrearObjeto(VACIO, j, i);
 		}
 
 	// Numero de enemigos entre 1 y 3
@@ -148,7 +148,7 @@ void iniciaTablero(objeto_t **tablero, int numFilas, int numColumnas)
 		while(tablero[yEnemigo][xEnemigo].esta_activo);
 
 		pTablero = &(tablero[yEnemigo][xEnemigo]);
-		*pTablero = CrearObjeto(enemigo, xEnemigo, yEnemigo);
+		*pTablero = CrearObjeto(ENEMIGO, xEnemigo, yEnemigo);
 	}
 
 	// Numero de misiles entre 2 y 5
@@ -161,13 +161,13 @@ void iniciaTablero(objeto_t **tablero, int numFilas, int numColumnas)
 
 		do
 		{
-			xMisil = rand() % numColumnas,
-				   yMisil = rand() % numFilas;
+			xMisil = rand() % numColumnas;
+			yMisil = rand() % numFilas;
 		}
 		while(tablero[yMisil][xMisil].esta_activo);
 
 		pTablero = &(tablero[yMisil][xMisil]);
-		*pTablero = CrearObjeto(misil, xMisil, yMisil);
+		*pTablero = CrearObjeto(MISIL, xMisil, yMisil);
 	}
 
 	//El  personaje principal está en la fila más inferior del tablero, en una columna aleatoria
@@ -175,10 +175,10 @@ void iniciaTablero(objeto_t **tablero, int numFilas, int numColumnas)
 		yPersonaje = numFilas - 1;
 
 	pTablero = &(tablero[yPersonaje][xPersonaje]);
-	*pTablero = CrearObjeto(personaje, xPersonaje, yPersonaje);
+	*pTablero = CrearObjeto(PERSONAJE, xPersonaje, yPersonaje);
 }
 
-void dibujaTablero(objeto_t **tablero, int numFilas, int numColumnas)
+void dibujaTablero(t_objeto **tablero, int numFilas, int numColumnas)
 {
 	// Por cada fila,columna de tablero
 	//		Si el objeto está activo
@@ -187,7 +187,7 @@ void dibujaTablero(objeto_t **tablero, int numFilas, int numColumnas)
 	//			Mostrar un espacio en blanco
 	for (int i=0; i<numFilas; i++)
 	{
-		if (i == numFilas - numFilas) 
+		if (i == numFilas - numFilas)
 		{
 			printf(" ");
 			for (int i=0; i<numColumnas; i++) printf("-");

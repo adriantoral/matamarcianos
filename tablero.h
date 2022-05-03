@@ -1,6 +1,6 @@
 /* Author : Adrian Toral */
 /* Codigo : Matamarcianos en c */
-/* Fecha  : 24-04-2022 */
+/* Fecha  : 03-05-2022 */
 
 #ifndef __TABLERO_H__
 #define __TABLERO_H__
@@ -10,12 +10,12 @@
 
 #include "tipos.h"
 
-void iniciaTablero(objeto_t **tablero, int numFilas, int numColumnas);
-void dibujaTablero(objeto_t **tablero, int numFilas, int numColumnas);
-objeto_t **reservaTablero(int numFilas, int numColumnas);
-void liberaTablero(objeto_t **tablero, int numFilas);
-void actualizaTablero(objeto_t **tablero, int numFilas, int numColumnas);
-int buscaPersonaje(objeto_t **tablero, int numFilas, int numColumnas); // Devuleve 1 si encuentra al personaje 0 sino
+void iniciaTablero(t_objeto **tablero, int numFilas, int numColumnas);
+void dibujaTablero(t_objeto **tablero, int numFilas, int numColumnas);
+t_objeto **reservaTablero(int numFilas, int numColumnas);
+void liberaTablero(t_objeto **tablero, int numFilas);
+void actualizaTablero(t_objeto **tablero, int numFilas, int numColumnas);
+int buscaPersonaje(t_objeto **tablero, int numFilas, int numColumnas); // Devuleve 1 si encuentra al personaje 0 sino
 
 #endif
 

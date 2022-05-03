@@ -7,9 +7,9 @@
 
 #include "tipos.h"
 
-personaje_t CrearPersonajePrincipal();
-void muevePersonaje(objeto_t* objeto, int numFilas, int numColumnas);
-personaje_t CrearPersonajePrincipalConDatos(int vida, int puntuacion);
+t_personaje CrearPersonajePrincipal();
+void muevePersonaje(t_objeto* objeto, int numFilas, int numColumnas);
+t_personaje CrearPersonajePrincipalConDatos(int vida, int puntuacion);
 
 #endif
 

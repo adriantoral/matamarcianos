@@ -7,9 +7,9 @@
 
 #include "tipos.h"
 
-enemigo_t CrearEnemigo();
-void mueveEnemigo(objeto_t* objeto, int numFilas, int numColumnas);
-enemigo_t CrearEnemigoConDatos(int vida, int puntuacion, movimiento_t *movimientos);
+t_enemigo CrearEnemigo();
+void mueveEnemigo(t_objeto* objeto, int numFilas, int numColumnas);
+t_enemigo CrearEnemigoConDatos(int vida, int puntuacion, t_movimiento *movimientos);
 
 #endif
 

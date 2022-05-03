@@ -7,9 +7,9 @@
 ////////////////////////////
 // Aniadir función para crear un enemigo con valores por defecto (todo a 0).
 
-enemigo_t CrearEnemigo()
+t_enemigo CrearEnemigo()
 {
-	enemigo_t enemigo;
+	t_enemigo enemigo;
 
 	enemigo.vida = 0;
 	enemigo.puntuacion = 0;
@@ -28,21 +28,23 @@ enemigo_t CrearEnemigo()
 	return enemigo;
 }
 
-enemigo_t CrearEnemigoConDatos(int vida, int puntuacion, movimiento_t *movimientos)
+t_enemigo CrearEnemigoConDatos(int vida, int puntuacion, t_movimiento *movimientos)
 {
-        enemigo_t enemigo = CrearEnemigo();
+	t_enemigo enemigo = CrearEnemigo();
 
-        // Inicializar una estructura de tipo enemigo_t con los datos de vida, puntuacion
-        // y movimientos suministrados
-        // El array “movimientos” debe tener 4 elementos como mínimo
+	// Inicializar una estructura de tipo enemigo_t con los datos de vida, puntuacion
+	// y movimientos suministrados
+	// El array “movimientos” debe tener 4 elementos como mínimo
 
-        enemigo.vida = vida;
-        enemigo.puntuacion = puntuacion;
+	enemigo.vida = vida;
+	enemigo.puntuacion = puntuacion;
 
-        return enemigo;
+	/* enemigo.movimientos = movimientos; */
+
+	return enemigo;
 }
 
-void mueveEnemigo(objeto_t* objeto, int numFilas, int numColumnas)
+void mueveEnemigo(t_objeto* objeto, int numFilas, int numColumnas)
 {
 	// Obtener el índice del movimiento que se va a realizar, que está almacenado en la
 	// Sumar a la posición del objeto la cantidad de movimiento en X Y indicada por el array
