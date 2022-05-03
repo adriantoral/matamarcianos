@@ -37,7 +37,7 @@ objeto_t **reservaTablero(int numFilas, int numColumnas)
 	objeto_t **tablero = NULL;
 
 	// Iniciar la primera dimensión del puntero doble “tablero” con un array de numFilas de punteros a objeto_t
-	tablero = (objeto_t **)malloc(sizeof(objeto_t) * numFilas);
+	tablero = (objeto_t **)malloc(sizeof(objeto_t *) * numFilas);
 
 	// Inicializar esa fila del tablero con un array de objeto_t de tamaño “numColumnas"
 	for (int i=0; i<numFilas; i++) tablero[i] = (objeto_t *)malloc(sizeof(objeto_t) * numColumnas);
@@ -101,17 +101,7 @@ void actualizaTablero(objeto_t **tablero, int numFilas, int numColumnas)
 				// Se desactiva el objeto que estaba en la posición original (variable activo del objeto accedido con los contadores del “for” a false)
 				if (objeto_siguiente->esta_activo)
 				{
-					switch (objeto->tipo)
-					{
-						case enemigo:
-						case misil:
-						case personaje:
-							if ((objeto_siguiente->tipo == misil && objeto->tipo == enemigo) || (objeto_siguiente->tipo == enemigo && objeto->tipo == misil) || (objeto_siguiente->tipo == misil && objeto->tipo == personaje)) objeto->esta_activo = 0;
-							break;
-
-						case empty:
-							break;
-					}
+					if ((objeto_siguiente->tipo == misil && objeto->tipo == enemigo) || (objeto_siguiente->tipo == enemigo && objeto->tipo == misil) || (objeto_siguiente->tipo == misil && objeto->tipo == personaje)) objeto->esta_activo = 0;
 				}
 
 				*objeto_siguiente = *objeto;
