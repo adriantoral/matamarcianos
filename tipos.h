@@ -1,6 +1,6 @@
 /* Author : Adrian Toral */
 /* Codigo : Matamarcianos en c */
-/* Fecha  : 03-05-2022 */
+/* Fecha  : 04-05-2022 */
 
 #ifndef __TIPOS_H__
 #define __TIPOS_H__
@@ -52,7 +52,8 @@ typedef struct t_enemigo
 {
 	int vida; // Vida actual del enemigo (0-99)
 	int puntuacion; // Puntuacion recibida por el usuario al matar al enemigo (0-1000)
-	t_movimiento movimientos[MOVIMIENTOS]; // Array del movimiento (intVector2D_t [i]array{})
+	/* t_movimiento movimientos[MOVIMIENTOS]; // Array del movimiento (intVector2D_t [i]array{}) */
+	t_movimiento *movimientos; // Array del movimiento (intVector2D_t [i]array{}) (version 3)
 	int indice_movimiento; // Indice del array movimientos
 	int tamanio_movimientos; // Tamanio del array movimientos
 } t_enemigo;

@@ -14,16 +14,17 @@ t_enemigo CrearEnemigo()
 	enemigo.vida = 0;
 	enemigo.puntuacion = 0;
 	enemigo.indice_movimiento = 0;
-	enemigo.tamanio_movimientos = MOVIMIENTOS;
+	/* enemigo.tamanio_movimientos = MOVIMIENTOS; */
 
 	int X[] = {1, 0, -1, 0},
 		Y[] = {0, 1, 0, -1};
 
-	for(int i=0; i<MOVIMIENTOS; i++)
-	{
-		enemigo.movimientos[i].x = X[i];
-		enemigo.movimientos[i].y = Y[i];
-	}
+	/* Eliminado para la nueva version (Invalid write) */
+	/* for(int i=0; i<MOVIMIENTOS; i++) */
+	/* { */
+	/* 	enemigo.movimientos[i].x = X[i]; */
+	/* 	enemigo.movimientos[i].y = Y[i]; */
+	/* } */
 
 	return enemigo;
 }
@@ -38,8 +39,7 @@ t_enemigo CrearEnemigoConDatos(int vida, int puntuacion, t_movimiento *movimient
 
 	enemigo.vida = vida;
 	enemigo.puntuacion = puntuacion;
-
-	/* enemigo.movimientos = movimientos; */
+	enemigo.movimientos = movimientos;
 
 	return enemigo;
 }

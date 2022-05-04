@@ -1,6 +1,6 @@
 /* Author : Adrian Toral */
 /* Codigo : Matamarcianos en c */
-/* Fecha  : 03-05-2022 */
+/* Fecha  : 04-05-2022 */
 
 #include <stdio.h>
 #include <unistd.h>
@@ -12,6 +12,32 @@
 #include "objetos.h"
 #include "personaje.h"
 #include "tipos.h"
+
+void iniciaTableroConDatos(t_objeto **tablero, int numFilas, int numColumnas, int numObjetos, char **datos)
+{
+	// Inicializar el tablero con objetos "no activos"
+	// por cada número de cadenas del array datos
+	// iniciar un objeto con datos (llamar a la función “crearObjetoConDatos” pasándole una cadena
+	// del array “datos”)
+	// colocarlo en la posición del tablero indicada por su “posX/Y”
+	// antes de colocarlo, comprobar si las posiciones están dentro del tablero
+	// si no están, se avisa al usuario
+
+	t_objeto *pTablero = NULL;
+
+	for (int i=0; i<numFilas; i++)
+		for (int j=0; j<numColumnas; j++)
+		{
+			pTablero = &(tablero[i][j]);
+			*pTablero = CrearObjeto(VACIO, j, i);
+		}
+
+	for (int i=1; i<numObjetos; i++)
+	{
+		t_objeto objeto = CrearObjetoConDatos(datos[i]);
+		tablero[objeto.posicion.y][objeto.posicion.x] = objeto;
+	}
+}
 
 int buscaPersonaje(t_objeto **tablero, int numFilas, int numColumnas)
 {
@@ -25,9 +51,16 @@ int buscaPersonaje(t_objeto **tablero, int numFilas, int numColumnas)
 	return 0;
 }
 
-void liberaTablero(t_objeto **tablero, int numFilas)
+void liberaTablero(t_objeto **tablero, int numFilas, int numColumnas)
 {
-	for (int i=0; i<numFilas; i++) free(tablero[i]);
+	for (int i=0; i<numFilas; i++)
+	{
+		for (int j=0; j<numColumnas; j++)
+			if (tablero[i][j].tipo == ENEMIGO)
+				free(tablero[i][j].enemigo.movimientos);
+
+		free(tablero[i]);
+	}
 	free(tablero);
 }
 
@@ -101,7 +134,11 @@ void actualizaTablero(t_objeto **tablero, int numFilas, int numColumnas)
 				// Se desactiva el objeto que estaba en la posición original (variable activo del objeto accedido con los contadores del “for” a false)
 				if (objeto_siguiente->esta_activo)
 				{
-					if ((objeto_siguiente->tipo == MISIL && objeto->tipo == ENEMIGO) || (objeto_siguiente->tipo == ENEMIGO && objeto->tipo == MISIL) || (objeto_siguiente->tipo == MISIL && objeto->tipo == PERSONAJE)) objeto->esta_activo = 0;
+					if ((objeto_siguiente->tipo == MISIL && objeto->tipo == ENEMIGO) || (objeto_siguiente->tipo == ENEMIGO && objeto->tipo == MISIL) || (objeto_siguiente->tipo == MISIL && objeto->tipo == PERSONAJE) || (objeto_siguiente->tipo == ENEMIGO && objeto->tipo == ENEMIGO))
+					{
+						if (objeto_siguiente->tipo == ENEMIGO) free(objeto_siguiente->enemigo.movimientos);
+						objeto->esta_activo = 0;
+					}
 				}
 
 				*objeto_siguiente = *objeto;

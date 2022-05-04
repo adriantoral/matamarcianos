@@ -8,6 +8,9 @@
 #include "tipos.h"
 
 t_objeto CrearObjeto(e_tipoObjeto tipo, int x=0, int y=0);
+e_tipoObjeto dameTipo(char *strTipo);
+e_direccion dameDireccion(char *strDir);
+t_objeto CrearObjetoConDatos(char *cadena);
 
 #endif
 
