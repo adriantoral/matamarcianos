@@ -1,6 +1,6 @@
 /* Author : Adrian Toral */
 /* Codigo : Matamarcianos en c */
-/* Fecha  : 04-05-2022 */
+/* Fecha  : 05-05-2022 */
 
 #include <string.h>
 #include <stdlib.h>
@@ -134,7 +134,14 @@ t_objeto CrearObjetoConDatos(char *cadena)
 				// Datos del enemigo
 				else if (!strcmp(dato, "vida") && tipo == ENEMIGO) enemigo_vida = strtol(metadato, NULL, 10);
 				else if (!strcmp(dato, "puntuacion") && tipo == ENEMIGO) enemigo_puntuacion = strtol(metadato, NULL, 10);
-				/* else if (!strcmp(dato, "movimientos")) objeto.misil.danio = strtol(metadato, NULL, 10); */
+				else if (!strcmp(dato, "x") && tipo == ENEMIGO)
+				{
+					// Si encuentra una x, reserva memoria para el movimiento del enemigo y guarda su valor
+					// Si encuentra y, aumenta en uno en numero de movimientos y guarda su valor
+					enemigo_movimientos = (t_movimiento *)realloc(enemigo_movimientos, sizeof(t_movimiento) * (nEnemigo_movimientos + 1));
+					enemigo_movimientos[nEnemigo_movimientos].x = strtol(metadato, NULL, 10);
+				}
+				else if (!strcmp(dato, "y") && tipo == ENEMIGO)	enemigo_movimientos[nEnemigo_movimientos++].y = strtol(metadato, NULL, 10);
 
 				// Datos del misil
 				else if (!strcmp(dato, "direccion")) misil_direccion = dameDireccion(metadato);
@@ -165,11 +172,6 @@ t_objeto CrearObjetoConDatos(char *cadena)
 	switch (tipo)
 	{
 		case ENEMIGO:
-			// Prueba para movimientos del enemigo
-			enemigo_movimientos = (t_movimiento *)realloc(enemigo_movimientos, sizeof(t_movimiento) * (nEnemigo_movimientos + 1));
-			enemigo_movimientos[nEnemigo_movimientos].x = 1;
-			enemigo_movimientos[nEnemigo_movimientos++].y = -2;
-
 			objeto.enemigo = CrearEnemigoConDatos(enemigo_vida, enemigo_puntuacion, enemigo_movimientos);
 			objeto.enemigo.tamanio_movimientos = nEnemigo_movimientos;
 			break;
