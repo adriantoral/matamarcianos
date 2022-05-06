@@ -77,15 +77,15 @@ t_objeto CrearObjetoConDatos(char *cadena)
 	e_direccion misil_direccion = PARADO;
 	t_movimiento *enemigo_movimientos = NULL;
 
-	strcpy(cadena_aux, cadena); // objeto[posX=6,posY=9,sprite=A,tipo=personaje,vida=5,puntuacion=0]
+	strcpy(cadena_aux, cadena); // objeto[posX=6,posY=9,sprite=A,tipo=personaje,vida=5,puntuacion=0,movimientos=x=1,y=1,x=2,y=2,x=3,y=3,x=4,y=4]
 
 	// Si el primer token es la palabra “objeto”
 	// iterar iniciando cada una de las variables posibles. Se acaba cuando "token" o "valor"
 	// son null
-	if (!strcmp(strtok(cadena_aux, "["), "objeto")) // posX=6,posY=9,sprite=A,tipo=personaje,vida=5,puntuacion=0]
+	if (!strcmp(strtok(cadena_aux, "["), "objeto")) // posX=6,posY=9,sprite=A,tipo=personaje,vida=5,puntuacion=0,movimientos=x=1,y=1,x=2,y=2,x=3,y=3,x=4,y=4]
 	{
-		cadena_aux_p = strtok(NULL, "]"); // posX=6,posY=9,sprite=A,tipo=personaje,vida=5,puntuacion=0
-		cadena_cpy = (char *)realloc(cadena_cpy, strlen(cadena_aux_p) + 1); // posX=6,posY=9,sprite=A,tipo=personaje,vida=5,puntuacion=0 (copia)
+		cadena_aux_p = strtok(NULL, "]"); // posX=6,posY=9,sprite=A,tipo=personaje,vida=5,puntuacion=0,movimientos=x=1,y=1,x=2,y=2,x=3,y=3,x=4,y=4
+		cadena_cpy = (char *)realloc(cadena_cpy, strlen(cadena_aux_p) + 1); // posX=6,posY=9,sprite=A,tipo=personaje,vida=5,puntuacion=0,movimientos=x=1,y=1,x=2,y=2,x=3,y=3,x=4,y=4 (copia)
 		strcpy(cadena_cpy, cadena_aux_p);
 
 		datos_metadatos = strtok(cadena_cpy, ",");
@@ -125,6 +125,12 @@ t_objeto CrearObjetoConDatos(char *cadena)
 			// leer los cuatro movimientos y almacenarlos
 			if (dato)
 			{
+				if (!strcmp(dato, "movimientos"))
+				{
+					dato = metadato;
+					metadato = strtok(NULL, "=");
+				}
+
 				// Datos generales
 				if		(!strcmp(dato, "posX")) posX = strtol(metadato, NULL, 10);
 				else if (!strcmp(dato, "posY")) posY = strtol(metadato, NULL, 10);
