@@ -1,6 +1,6 @@
 /* Author : Adrian Toral */
 /* Codigo : Matamarcianos en c */
-/* Fecha  : 04-05-2022 */
+/* Fecha  : 07-05-2022 */
 
 #include <stdio.h>
 #include <unistd.h>
@@ -35,7 +35,16 @@ void iniciaTableroConDatos(t_objeto **tablero, int numFilas, int numColumnas, in
 	for (int i=1; i<numObjetos; i++)
 	{
 		t_objeto objeto = CrearObjetoConDatos(datos[i]);
-		tablero[objeto.posicion.y][objeto.posicion.x] = objeto;
+		if ((objeto.posicion.y < numFilas && objeto.posicion.y >= 0) && (objeto.posicion.x < numColumnas && objeto.posicion.x >= 0))
+			tablero[objeto.posicion.y][objeto.posicion.x] = objeto;
+		else
+		{
+			// Si el objeto es un enemigo, libera su memoria de movimientos
+			if (objeto.tipo == ENEMIGO)
+				free(objeto.enemigo.movimientos);
+
+			printf("El objeto con posicion X:%d, Y:%d no se ha podido crear. Esta fuera del tablero\n", objeto.posicion.x, objeto.posicion.y);
+		}
 	}
 }
 
@@ -55,6 +64,7 @@ void liberaTablero(t_objeto **tablero, int numFilas, int numColumnas)
 {
 	for (int i=0; i<numFilas; i++)
 	{
+		// Si el objeto es un enemigo, libera su memoria de movimientos
 		for (int j=0; j<numColumnas; j++)
 			if (tablero[i][j].tipo == ENEMIGO)
 				free(tablero[i][j].enemigo.movimientos);
@@ -136,7 +146,10 @@ void actualizaTablero(t_objeto **tablero, int numFilas, int numColumnas)
 				{
 					if ((objeto_siguiente->tipo == MISIL && objeto->tipo == ENEMIGO) || (objeto_siguiente->tipo == ENEMIGO && objeto->tipo == MISIL) || (objeto_siguiente->tipo == MISIL && objeto->tipo == PERSONAJE) || (objeto_siguiente->tipo == ENEMIGO && objeto->tipo == ENEMIGO))
 					{
-						if (objeto_siguiente->tipo == ENEMIGO) free(objeto_siguiente->enemigo.movimientos);
+						// Si el objeto es un enemigo, libera su memoria de movimientos
+						if (objeto_siguiente->tipo == ENEMIGO)
+							free(objeto_siguiente->enemigo.movimientos);
+
 						objeto->esta_activo = 0;
 					}
 				}
