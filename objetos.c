@@ -146,6 +146,9 @@ t_objeto CrearObjetoConDatos(char *cadena)
 					// Si encuentra y, aumenta en uno en numero de movimientos y guarda su valor
 					enemigo_movimientos = (t_movimiento *)realloc(enemigo_movimientos, sizeof(t_movimiento) * (nEnemigo_movimientos + 1));
 					enemigo_movimientos[nEnemigo_movimientos].x = strtol(metadato, NULL, 10);
+
+					// Inicia y a 0 por si no se define posteriormente
+					enemigo_movimientos[nEnemigo_movimientos].y = 0;
 				}
 				else if (!strcmp(dato, "y") && tipo == ENEMIGO)	enemigo_movimientos[nEnemigo_movimientos++].y = strtol(metadato, NULL, 10);
 

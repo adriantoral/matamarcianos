@@ -16,8 +16,8 @@ t_enemigo CrearEnemigo()
 	enemigo.indice_movimiento = 0;
 	/* enemigo.tamanio_movimientos = MOVIMIENTOS; */
 
-	int X[] = {1, 0, -1, 0},
-		Y[] = {0, 1, 0, -1};
+	/* int X[] = {1, 0, -1, 0}, */
+	/* 	Y[] = {0, 1, 0, -1}; */
 
 	/* Eliminado para la nueva version (Invalid write) */
 	/* for(int i=0; i<MOVIMIENTOS; i++) */
