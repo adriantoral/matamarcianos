@@ -1,29 +1,41 @@
 /* Author : Adrian Toral */
 /* Codigo : Matamarcianos en c */
-/* Fecha  : 24-04-2022 */
+/* Fecha  : 03-05-2022 */
 
 #include "misil.h"
 
 ////////////////////////////////////////////////////////
 // Aniadir la función para crear un misil con valores por defecto (todo a 0, dirección ascendente).
 
-misil_t CrearMisil()
+t_misil CrearMisil()
 {
-	misil_t misil;
+	t_misil misil;
 
 	misil.danio = 0;
-	misil.direccion = ascendente;
+	misil.direccion = ASCENDENTE;
 
 	return misil;
 }
 
-void mueveMisil(objeto_t* objeto, int numFilas, int numColumnas)
+t_misil CrearMisilConDatos(int danio, e_direccion direccion)
+{
+	t_misil misil = CrearMisil();
+
+	// Inicializar una estructura de tipo misil _t con los
+	// datos de danio y puntuacion suministrados
+	misil.danio = danio;
+	misil.direccion = direccion;
+
+	return misil;
+}
+
+void mueveMisil(t_objeto* objeto, int numFilas, int numColumnas)
 {
 	// Si la dirección del misil es ascendente:
 	// Sumar 1 a la coordenada Y de su posición
 	// Si no
 	// Restar 1 a la coordenada Y de su posición
-	int y = objeto->misil.direccion == ascendente ? objeto->posicion.y + 1 : objeto->posicion.y - 1;
+	int y = objeto->misil.direccion == ASCENDENTE ? objeto->posicion.y + 1 : objeto->misil.direccion == DESCENDENTE ? objeto->posicion.y - 1 : objeto->posicion.y;
 
 	// Comprobar coordenadas nuevas
 	// Si está fuera del número de Filas válidas del tablero, se desactiva
